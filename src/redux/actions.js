@@ -11,7 +11,7 @@ export const addContact = (name, phone) => {
   };
 };
 
-export const deleteContact = (id) => {
+export const deleteContactd = (id) => {
   return {
     type: "contacts/deleteContact",
     payload: {
