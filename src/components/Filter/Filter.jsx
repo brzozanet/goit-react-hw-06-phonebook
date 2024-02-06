@@ -1,6 +1,15 @@
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { filteredContacts } from "../../redux/actions";
 
-export const Filter = ({ handleFilterChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+
+  const handleSetFilter = (event) => {
+    event.preventDefault();
+    const name = event.target[0].value;
+    dispatch(filteredContacts(name));
+  };
+
   return (
     <label>
       Find contacts by name:
@@ -10,12 +19,8 @@ export const Filter = ({ handleFilterChange }) => {
         name="filter"
         placeholder="Search name"
         id=""
-        onChange={handleFilterChange}
+        onChange={handleSetFilter}
       />
     </label>
   );
-};
-
-Filter.propTypes = {
-  handleFilterChange: PropTypes.func.isRequired,
 };

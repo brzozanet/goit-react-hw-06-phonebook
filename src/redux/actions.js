@@ -5,8 +5,8 @@ export const addContact = (name, phone) => {
     type: "contacts/addContact",
     payload: {
       id: nanoid(),
-      name: name,
-      phone: phone,
+      name,
+      phone,
     },
   };
 };
@@ -15,7 +15,16 @@ export const deleteContact = (id) => {
   return {
     type: "contacts/deleteContact",
     payload: {
-      id: id,
+      id,
+    },
+  };
+};
+
+export const filteredContacts = (name) => {
+  return {
+    type: "contacts/filteredContacts",
+    payload: {
+      name,
     },
   };
 };
