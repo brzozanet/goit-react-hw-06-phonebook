@@ -20,11 +20,11 @@ export const deleteContact = (id) => {
   };
 };
 
-export const filteredContacts = (name) => {
+export const filteredContacts = (query) => {
   return {
-    type: "contacts/filteredContacts",
+    type: "filter/filteredContacts",
     payload: {
-      name,
+      query,
     },
   };
 };

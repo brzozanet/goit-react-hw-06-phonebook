@@ -3,14 +3,19 @@ import { deleteContact } from "../../redux/actions";
 
 export const ContactList = () => {
   const contacts = useSelector((state) => state.contacts);
+  const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
+
+  const visibleContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   const handleDeleteContact = (id) => dispatch(deleteContact(id));
 
   return (
     <>
       <ul>
-        {contacts.map((contact) => (
+        {visibleContacts.map((contact) => (
           <li key={contact.id}>
             {contact.name}: {contact.phone}{" "}
             <button onClick={() => handleDeleteContact(contact.id)}>
