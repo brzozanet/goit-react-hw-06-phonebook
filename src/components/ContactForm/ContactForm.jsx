@@ -45,7 +45,6 @@ export const ContactForm = () => {
               placeholder="Contact name"
               pattern="^[a-zA-Z]+(([' \u2013][a-zA-Z])?[a-zA-Z]*)*$"
               title="Name may contain only letters, apostrophe, dash, and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              defaultValue="Jan Kowalski"
               required
             />
           </label>
@@ -60,7 +59,6 @@ export const ContactForm = () => {
               name="number"
               placeholder="Contact number"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              defaultValue="502636629"
               required
             />
           </label>
