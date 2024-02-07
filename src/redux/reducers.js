@@ -1,3 +1,4 @@
+import { createReducer } from "@reduxjs/toolkit";
 import { addContact, deleteContact, filteredContacts } from "./actions";
 
 const contactsInitialState = [
@@ -8,24 +9,23 @@ const contactsInitialState = [
   { id: 5, name: "Ilona Cynk Kastelik", phone: "200126845" },
 ];
 
-export const contactsReducer = (state = contactsInitialState, action) => {
-  switch (action.type) {
-    case addContact.type:
-      return [...state, action.payload];
-    case deleteContact.type:
-      return state.filter((contact) => contact.id !== action.payload.id);
-    default:
-      return state;
+export const contactsReducer = createReducer(
+  contactsInitialState,
+  (builder) => {
+    builder
+      .addCase(addContact, (state, action) => {
+        state.push(action.payload);
+      })
+      .addCase(deleteContact, (state, action) => {
+        return state.filter((contact) => contact.id !== action.payload.id);
+      });
   }
-};
+);
 
-const initialFilter = "";
+const filterInitialState = "";
 
-export const filterReducer = (state = initialFilter, action) => {
-  switch (action.type) {
-    case filteredContacts.type:
-      return action.payload.query;
-    default:
-      return state;
-  }
-};
+export const filterReducer = createReducer(filterInitialState, (builder) => {
+  builder.addCase(filteredContacts, (state, action) => {
+    return action.payload.query;
+  });
+});
