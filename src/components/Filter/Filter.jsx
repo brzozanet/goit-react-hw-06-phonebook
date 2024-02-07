@@ -1,28 +1,25 @@
 import { useDispatch } from "react-redux";
-import { filteredContacts } from "../../redux/actions";
+import { addFilter } from "../../redux/filterSlice";
 
 export const Filter = () => {
   const dispatch = useDispatch();
 
-  const handleSetFilter = (event) => {
-    event.preventDefault();
-    const name = event.target.value;
-    dispatch(filteredContacts(name));
+  //Ustawia filtr do wyszukiwania kontaktów
+  const handleFilter = (event) => {
+    dispatch(addFilter(event.target.value));
   };
 
   return (
     <>
-      <label>
+      <div>
         Find contacts by name:
         <br />
         <input
           type="text"
-          name="filter"
+          onChange={handleFilter}
           placeholder="Search name"
-          id=""
-          onChange={handleSetFilter}
-        />
-      </label>
+        ></input>
+      </div>
     </>
   );
 };
