@@ -1,29 +1,24 @@
-import { useSelector, useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contacstSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 
 export const ContactList = () => {
+  const contacts = useSelector((state) => state.contacts);
+  const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
-  const contacts = useSelector((state) => state.contacts);
-  const filterValue = useSelector((state) => state.filter);
-
-  //Usuwa kontakt z bazy danych na podstawie id
-  const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id));
-  };
-
-  // Filtruje kontakty na podstawie przekazanej tablicy (contacts) i stringa (filter)
-  const filteredArray = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filterValue.toLowerCase())
+  const visibleContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
   );
+
+  const handleDeleteContact = (id) => dispatch(deleteContact(id));
 
   return (
     <>
       <ul>
-        {filteredArray.map(({ id, name, number }) => (
-          <li key={id}>
-            {name}: {number}{" "}
-            <button type="button" onClick={() => handleDeleteContact(id)}>
+        {visibleContacts.map((contact) => (
+          <li key={contact.id}>
+            {contact.name}: {contact.phone}{" "}
+            <button onClick={() => handleDeleteContact(contact.id)}>
               Delete
             </button>
           </li>
